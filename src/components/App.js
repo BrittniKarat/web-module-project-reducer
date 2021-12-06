@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import reducer, { initialState } from '../reducers/index';
-import { addOne, applyNumber } from '../actions/index';
+import { addOne, applyNumber, changeOperation, clearDisplay } from '../actions/index';
 
 import './App.css';
 
@@ -10,10 +10,19 @@ import CalcButton from './CalcButton';
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const handleAdd = () => {
-      dispatch(addOne());
-  }
-
+  // const handleAdd = () => {
+  //     dispatch(addOne());
+  // }
+  const handleApplyNumber = (e) => {
+    dispatch(applyNumber(e.target.value));
+  };
+  const handleOperator = (e) => {
+    dispatch(changeOperation(e.target.value))
+  };
+  const handleClear = () => {
+    dispatch(clearDisplay())
+  };
+ 
   return (
     <div className="App">
       <nav className="navbar navbar-dark bg-dark">
@@ -37,31 +46,32 @@ function App() {
             </div>
 
             <div className="row">
-              <CalcButton value={1} onClick={handleAdd}/>
-              <CalcButton value={2}/>
-              <CalcButton value={3}/>
+              <CalcButton value={1} onClick={handleApplyNumber}/>
+              <CalcButton value={2} onClick={handleApplyNumber}/>
+              <CalcButton value={3} onClick={handleApplyNumber}/>
             </div>
 
             <div className="row">
-              <CalcButton value={4}/>
-              <CalcButton value={5}/>
-              <CalcButton value={6}/>
+              <CalcButton value={4} onClick={handleApplyNumber}/>
+              <CalcButton value={5} onClick={handleApplyNumber}/>
+              <CalcButton value={6} onClick={handleApplyNumber}/>
             </div>
 
             <div className="row">
-              <CalcButton value={7}/>
-              <CalcButton value={8}/>
-              <CalcButton value={9}/>
+              <CalcButton value={7} onClick={handleApplyNumber}/>
+              <CalcButton value={8} onClick={handleApplyNumber}/>
+              <CalcButton value={9} onClick={handleApplyNumber}/>
             </div>
 
             <div className="row">
-              <CalcButton value={"+"}/>
-              <CalcButton value={"*"}/>
-              <CalcButton value={"-"}/>
+              <CalcButton value={"+"} onClick={handleOperator}/>
+              <CalcButton value={"*"} onClick={handleOperator}/>
+              <CalcButton value={"-"} onClick={handleOperator}/>
+              
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton value={"CE"} onClick={handleClear}/>
             </div>
 
           </form>
