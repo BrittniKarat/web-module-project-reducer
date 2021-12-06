@@ -11,7 +11,7 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleApplyNumber = (e) => {
-    dispatch(applyNumber(e.target.value));
+    dispatch(applyNumber(Number(e.target.value)));
   };
   const handleOperator = (e) => {
     dispatch(changeOperation(e.target.value))
